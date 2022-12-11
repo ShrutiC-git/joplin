@@ -1,0 +1,21 @@
+version: "3"
+
+x-uffizzi:
+  ingress:
+    service: novnc
+    port: 80
+
+services:
+
+  novnc:
+    container_name: vnc
+    image: dorowu/ubuntu-desktop-lxde-vnc
+    environment:
+      - VNC_VIEW_ONLY=true
+    ports:
+      - "80:80"
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 4000M
