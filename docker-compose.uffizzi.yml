@@ -15,6 +15,10 @@ services:
     ports:
       - "80:80"
     restart: on-failure
+    devices:
+      - /dev/fuse:/dev/fuse
+    cap_add:
+      - SYS_ADMIN
     deploy:
       resources:
         limits:
