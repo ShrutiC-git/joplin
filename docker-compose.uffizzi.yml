@@ -1,0 +1,30 @@
+version: "3"
+
+x-uffizzi:
+  ingress:
+    service: novnc
+    port: 80
+
+services:
+
+  novnc:
+    container_name: vnc
+    image: dorowu/ubuntu-desktop-lxde-vnc
+    environment:
+      - VNC_VIEW_ONLY=true
+    ports:
+      - "80:80"
+    restart: on-failure
+    privileged: true
+    # entrypoint: /bin/sh
+    # command:
+    #      - "-c"
+    #      - "sudo apt-get update -y && sudo apt-get install fuse libfuse2 -y && sudo addgroup fuse && sudo adduser $USER fuse"
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - /dev/fuse
+    deploy:
+      resources:
+        limits:
+          memory: 4000M
