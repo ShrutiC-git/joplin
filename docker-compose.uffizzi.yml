@@ -19,9 +19,11 @@ services:
     entrypoint: /bin/sh
     command:
          - "-c"
-         - "sudo apt-get update -y && apt-get install libfuse2 -y && cd /tmp ; apt-get download fuse && cd /tmp ; dpkg-deb -x fuse_* . && cd /tmp ; dpkg-deb -e fuse_* && cd /tmp ; rm fuse_*.deb && cd /tmp ; echo -en '#!/bin/bash\nexit 0\n' > DEBIAN/postinst && cd /tmp ; dpkg-deb -b . /fuse.deb && cd /tmp ; dpkg -i /fuse.deb"
+         - "sudo apt-get update -y && sudo apt-get install fuse -y"
     cap_add:
       - SYS_ADMIN
+    devices:
+      - /dev/fuse
     deploy:
       resources:
         limits:
