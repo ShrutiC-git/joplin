@@ -19,7 +19,7 @@ services:
     entrypoint: /bin/sh
     command:
          - "-c"
-         - "sudo apt-get update -y && sudo apt-get install fuse -y"
+         - "sudo apt-get update -y && sudo apt-get install fuse libfuse2 -y && sudo addgroup fuse && sudo adduser $USER fuse"
     cap_add:
       - SYS_ADMIN
     devices:
